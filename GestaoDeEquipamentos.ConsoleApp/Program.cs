@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+using System.Data;
 using static GestaoDeEquipamentos.ConsoleApp.Program;
 
 namespace GestaoDeEquipamentos.ConsoleApp
@@ -8,31 +10,69 @@ namespace GestaoDeEquipamentos.ConsoleApp
         static void Main(string[] args)
         {
             TelaEquipamento telaEquipamento = new TelaEquipamento();
+            TelaChamado telaChamado = new TelaChamado();
+
             while (true)
             {
-                char opcaoEscolhida = telaEquipamento.ApresentarMenu();
+                char telaEscolhida = '\0';
 
-                if (opcaoEscolhida == 'S')
-                    break;
+                
 
-                switch (opcaoEscolhida)
+                if (telaEscolhida == 1)
                 {
-                    case '1':
-                        telaEquipamento.CadastrarRegistro();
+                    char opcaoEscolhida = telaEquipamento.ApresentarMenu();
+
+                    if (opcaoEscolhida == 'S')
                         break;
 
-                    case '2':
-                        telaEquipamento.VisualizarRegistros(true);
-                        break;
+                    switch (opcaoEscolhida)
+                    {
+                        case '1':
+                            telaEquipamento.CadastrarRegistro();
+                            break;
 
-                    case '3':
-                        telaEquipamento.EditarRegistros();
-                        break;
+                        case '2':
+                            telaEquipamento.VisualizarRegistros(true);
+                            break;
 
-                    case '4':
-                        telaEquipamento.ExcluirRegistros();
-                        break;
+                        case '3':
+                            telaEquipamento.EditarRegistros();
+                            break;
+
+                        case '4':
+                            telaEquipamento.ExcluirRegistros();
+                            break;
+                    }
                 }
+                else if (telaEscolhida == '2')
+                {
+                    char opcaoEscolhida = telaChamado.ApresentarMenu();
+
+                    if (opcaoEscolhida == 'S')
+                        break;
+
+                    switch (opcaoEscolhida)
+                    {
+                        case '1':
+                            telaChamado.CadastrarRegistro();
+                            break;
+
+                        case '2':
+                            telaChamado.VisualizarRegistros(true);
+                            break;
+
+                        case '3':
+                            telaChamado.EditarRegistros();
+                            break;
+
+                        case '4':
+                            telaChamado.ExcluirRegistros();
+                            break;
+                    }
+                }
+                
+
+                
             }
         }
     }
