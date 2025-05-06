@@ -3,7 +3,7 @@
 
         public class TelaEquipamento
         {
-            public RepositorioEquipamento repositorioEquipamento = new RepositorioEquipamento();
+    public RepositorioEquipamento repositorioEquipamento;
             public void ExibirCabecalho()
             {
                 Console.Clear();

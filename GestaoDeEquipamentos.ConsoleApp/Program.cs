@@ -5,18 +5,23 @@ using static GestaoDeEquipamentos.ConsoleApp.Program;
 
 namespace GestaoDeEquipamentos.ConsoleApp
 {
-    internal partial class Program
+    class Program
     {
         static void Main(string[] args)
         {
+            RepositorioEquipamento repositorioEquipamento = new RepositorioEquipamento();
+
             TelaEquipamento telaEquipamento = new TelaEquipamento();
+            telaEquipamento.repositorioEquipamento = repositorioEquipamento;
+
             TelaChamado telaChamado = new TelaChamado();
+            telaChamado.repositorioEquipamento = repositorioEquipamento;
 
             while (true)
             {
-                char telaEscolhida = '\0';
+                char telaEscolhida = ApresentarMenuPrincipal();
 
-                
+
 
                 if (telaEscolhida == 1)
                 {
@@ -70,10 +75,32 @@ namespace GestaoDeEquipamentos.ConsoleApp
                             break;
                     }
                 }
-                
 
-                
+
+
             }
+        }
+
+        public static char ApresentarMenuPrincipal()
+        {
+            Console.Clear();
+
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine("|        Gestão de Equipamentos        |");
+            Console.WriteLine("----------------------------------------");
+
+            Console.WriteLine();
+
+            Console.WriteLine("1 - Controle de Equipamentos");
+            Console.WriteLine("2 - Controle de Chamados");
+            Console.WriteLine("S - Sair");
+
+            Console.WriteLine();
+
+            Console.Write("Escolha uma das opções: ");
+            char opcaoEscolhida = Console.ReadLine()[0];
+
+            return opcaoEscolhida;
         }
     }
 }
