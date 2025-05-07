@@ -10,12 +10,12 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 public class TelaChamado
 {
     public RepositorioEquipamento repositorioEquipamento;
+    public RepositorioChamado repositorioChamado;
 
     public void ExibirCabecalho()
     {
         Console.Clear();
-        Console.WriteLine("Gestão de Equipamentos");
-
+        Console.WriteLine("Gestão de Chamados");
         Console.WriteLine();
     }
 
@@ -23,11 +23,13 @@ public class TelaChamado
     {
         ExibirCabecalho();
 
-        Console.WriteLine("1 - Cadastro de Equipamentos");
-        Console.WriteLine("2 - Visualizar Equipamentos");
-        Console.WriteLine("3 - Editar Equipamentos");
-        Console.WriteLine("4 - Excluir Equipamentos");
+        Console.WriteLine("1 - Cadastro de Chamado");
+        Console.WriteLine("2 - Visualizar Chamado");
+        Console.WriteLine("3 - Editar chamado");
+        Console.WriteLine("4 - Excluir Chamado");
         Console.WriteLine("S - Sair");
+
+        Console.WriteLine();
 
         Console.Write("Digite uma opção válida: ");
         char opcaoEscolhida = Console.ReadLine().ToUpper()[0];
@@ -37,28 +39,101 @@ public class TelaChamado
 
     public void CadastrarRegistro()
     {
-        Console.Clear();
+        ExibirCabecalho();
+
         Console.WriteLine("Cadastro de Chamado");
         Console.WriteLine();
         Chamado chamado = ObterDados();
-       
+
+        repositorioChamado.CadastrarChamado(chamado);
+
         Console.WriteLine($"\nEChamado \"{chamado.titulo}\" cadastro com sucesso");
         Console.ReadLine();
     }
 
     public void EditarRegistros()
     {
-        throw new NotImplementedException();
+        ExibirCabecalho();
+
+        Console.WriteLine("Edição de Chamados");
+
+        Console.WriteLine();
+
+        VisualizarRegistros(false);
+
+        Console.Write("Ditite o id do registro que deseja selecionar: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+        Chamado chamadoAtualizado = ObterDados();
+
+        bool conseguiuEditar = repositorioChamado.EditarChamado(idSelecionado, chamadoAtualizado);
+
+        if (!conseguiuEditar)
+        {
+            Console.WriteLine("Não foi possivel encontrar o registro selecionado.");
+            Console.ReadLine();
+
+            return;
+        }
+        Console.WriteLine($"\nChamado \"{chamadoAtualizado.titulo}\" editado com sucesso");
+        Console.ReadLine();
     }
 
     public void ExcluirRegistros()
     {
-        throw new NotImplementedException();
+        ExibirCabecalho();
+
+        Console.WriteLine("Exclusão de Chamados");
+
+        Console.WriteLine();
+
+        VisualizarRegistros(false);
+
+        Console.Write("Ditite o id do registro que deseja selecionar: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+        bool conseguiuExluir = repositorioChamado.ExcluirChamado(idSelecionado);
+
+        if (!conseguiuExluir)
+        {
+            Console.WriteLine("Não foi possivel encontrar o registro selecionado.");
+            Console.ReadLine();
+
+            return;
+        }
+
+        Console.WriteLine($"\nChamado excluído com sucesso");
+        Console.ReadLine();
     }
 
     public void VisualizarRegistros(bool exibirCabecalho)
     {
-        throw new NotImplementedException();
+        if (exibirCabecalho == true)
+            ExibirCabecalho();
+
+        Console.WriteLine("Visualização de Chamados");
+        Console.WriteLine();
+
+        Console.WriteLine(
+            "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20}",
+            "Id", "Titulo", "Descrição", "data de Abertura", "Equipamento"
+            );
+        Chamado[] chamados = repositorioChamado.SelecionarChamado();
+
+        for (int i = 0; i < chamados.Length; i++)
+        {
+            Chamado c = chamados[i];
+
+            if (c == null)
+                continue;
+
+            Console.WriteLine(
+                "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20}",
+            c.id, c.titulo, c.descricao, c.dataAbertura.ToShortDateString(), c.equipamento, c.equipamento.nome
+            );
+        }
+
+        Console.ReadLine();
     }
 
     public Chamado ObterDados()
@@ -76,7 +151,15 @@ public class TelaChamado
         Console.Write("Digite o ID do equipmaneto que deseja selecionar: ");
         int idEquipamento = Convert.ToInt32(Console.ReadLine());
 
-        return null;
+        Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarEquipamentoPorId(idEquipamento);
+
+        Chamado chamado = new Chamado();
+        chamado.titulo = titulo;
+        chamado.descricao = descricao;
+        chamado.dataAbertura = dataAbertura;
+        chamado.equipamento = equipamentoSelecionado;
+
+        return chamado;
     }
 
     public void VisualizarEquipamentos()
@@ -85,7 +168,7 @@ public class TelaChamado
         Console.WriteLine();
 
         Console.WriteLine(
-            "{0,  -10} | {1,  -20} | {2,  -10} | {3,  -10} | {4,  -20} | {5,  -20}",
+            "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
             "Id", "Nome", "Preço de Aquisição", "Número Série", "Fabricante", "Data Fabricação"
             );
         Equipamento[] equipamentos = repositorioEquipamento.SelecionarEquipamento();
@@ -98,7 +181,7 @@ public class TelaChamado
                 continue;
 
             Console.WriteLine(
-                "{0,  -10} | {1,  -20} | {2,  -10} | {3,  -10} | {4,  -20} | {5,  -20}",
+                "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
             e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante, e.datafabricante.ToShortDateString()
             );
         }
