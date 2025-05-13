@@ -1,9 +1,4 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 
@@ -47,7 +42,7 @@ public class TelaChamado
 
         repositorioChamado.CadastrarChamado(chamado);
 
-        Console.WriteLine($"\nEChamado \"{chamado.titulo}\" cadastro com sucesso");
+        Console.WriteLine($"\nChamado \"{chamado.titulo}\" cadastro com sucesso");
         Console.ReadLine();
     }
 
@@ -129,7 +124,7 @@ public class TelaChamado
 
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20}",
-            c.id, c.titulo, c.descricao, c.dataAbertura.ToShortDateString(), c.equipamento, c.equipamento.nome
+            c.id, c.titulo, c.descricao, c.dataAbertura.ToShortDateString(), c.equipamento.nome
             );
         }
 
@@ -182,7 +177,7 @@ public class TelaChamado
 
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
-            e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante, e.datafabricante.ToShortDateString()
+            e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante.nome, e.datafabricante.ToShortDateString()
             );
         }
 
