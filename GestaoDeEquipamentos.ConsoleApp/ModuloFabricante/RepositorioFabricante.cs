@@ -2,7 +2,7 @@
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
-class RepositorioFabricante
+public class RepositorioFabricante
 {
     public Fabricante[] fabricantes = new Fabricante[100];
         public int contadorFabricante = 0;

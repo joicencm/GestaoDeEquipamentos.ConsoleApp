@@ -4,16 +4,14 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 
 public class TelaChamado
 {
-    public RepositorioEquipamento repositorioEquipamento;
-    public RepositorioChamado repositorioChamado;
+    private RepositorioEquipamento repositorioEquipamento;
+    private RepositorioChamado repositorioChamado;
 
-    public void ExibirCabecalho()
+    public TelaChamado(RepositorioEquipamento repositorioE, RepositorioChamado repositorioC)
     {
-        Console.Clear();
-        Console.WriteLine("Gestão de Chamados");
-        Console.WriteLine();
+        repositorioEquipamento = repositorioE;
+        repositorioChamado = repositorioC;
     }
-
     public char ApresentarMenu()
     {
         ExibirCabecalho();
@@ -131,31 +129,6 @@ public class TelaChamado
         Console.ReadLine();
     }
 
-    public Chamado ObterDados()
-    {
-        Console.Write("Digite o titulo do chamado");
-        string titulo = Console.ReadLine();
-
-        Console.Write("Digite a descrição do chamado");
-        string descricao = Console.ReadLine();
-
-        DateTime dataAbertura = DateTime.Now; // data e hora de agora
-
-        VisualizarEquipamentos();
-
-        Console.Write("Digite o ID do equipmaneto que deseja selecionar: ");
-        int idEquipamento = Convert.ToInt32(Console.ReadLine());
-
-        Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarEquipamentoPorId(idEquipamento);
-
-        Chamado chamado = new Chamado();
-        chamado.titulo = titulo;
-        chamado.descricao = descricao;
-        chamado.dataAbertura = dataAbertura;
-        chamado.equipamento = equipamentoSelecionado;
-
-        return chamado;
-    }
 
     public void VisualizarEquipamentos()
     {
@@ -183,4 +156,33 @@ public class TelaChamado
 
         Console.ReadLine();
     }
+    private void ExibirCabecalho()
+    {
+        Console.Clear();
+        Console.WriteLine("Gestão de Chamados");
+        Console.WriteLine();
+    }
+
+    private Chamado ObterDados()
+    {
+        Console.Write("Digite o titulo do chamado");
+        string titulo = Console.ReadLine();
+
+        Console.Write("Digite a descrição do chamado");
+        string descricao = Console.ReadLine();
+
+        DateTime dataAbertura = DateTime.Now; // data e hora de agora
+
+        VisualizarEquipamentos();
+
+        Console.Write("Digite o ID do equipmaneto que deseja selecionar: ");
+        int idEquipamento = Convert.ToInt32(Console.ReadLine());
+
+        Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarEquipamentoPorId(idEquipamento);
+
+        Chamado chamado = new Chamado(titulo, descricao, dataAbertura, equipamentoSelecionado);
+
+        return chamado;
+    }
+
 }

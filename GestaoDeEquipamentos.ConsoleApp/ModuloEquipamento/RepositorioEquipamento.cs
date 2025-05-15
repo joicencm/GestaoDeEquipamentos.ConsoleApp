@@ -3,8 +3,8 @@
 
         public class RepositorioEquipamento
         {
-            public Equipamento[] equipamentos = new Equipamento[100];
-            public int contadorEquipamento = 0;
+            private Equipamento[] equipamentos = new Equipamento[100];
+            private int contadorEquipamento = 0;
             public void CadastrarEquipamento(Equipamento equipamento)
             {
                 equipamentos[contadorEquipamento] = equipamento;

@@ -10,4 +10,13 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
             public string numeroSerie;
             public Fabricante fabricante;
             public DateTime datafabricante;
-        }
+
+    public Equipamento(string nome, decimal precoAquisicao, string numeroSerie, Fabricante fabricante, DateTime datafabricante)
+    {
+        this.nome = nome;
+        this.precoAquisicao = precoAquisicao;
+        this.numeroSerie = numeroSerie;
+        this.fabricante = fabricante;
+        this.datafabricante = datafabricante;
+    }
+}

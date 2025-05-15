@@ -4,15 +4,13 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
 public class TelaEquipamento
 {
-    public RepositorioEquipamento repositorioEquipamento;
-    internal RepositorioFabricante repositorioFabricante;
+    private RepositorioEquipamento repositorioEquipamento;
+    private RepositorioFabricante repositorioFabricante;
 
-    public void ExibirCabecalho()
+    public TelaEquipamento(RepositorioEquipamento repositorioE, RepositorioFabricante repositorioF)
     {
-        Console.Clear();
-        Console.WriteLine("Gestão de Equipamentos");
-
-        Console.WriteLine();
+        this.repositorioEquipamento = repositorioE;
+        this.repositorioFabricante = repositorioF;
     }
 
     public char ApresentarMenu()
@@ -130,7 +128,7 @@ public class TelaEquipamento
         }
 
         Console.ReadLine();
-    }  
+    }
 
     public void VisualizarFabricantes()
     {
@@ -146,7 +144,7 @@ public class TelaEquipamento
 
         Fabricante[] fabricantes = repositorioFabricante.SelecionarFabricantes();
 
-        for(int i = 0; i < fabricantes.Length; i++)
+        for (int i = 0; i < fabricantes.Length; i++)
         {
             Fabricante f = fabricantes[i];
 
@@ -161,35 +159,37 @@ public class TelaEquipamento
 
         Console.ReadLine();
     }
-   
 
-    public Equipamento ObterDados()
+    private void ExibirCabecalho()
     {
-        Console.WriteLine("Digite o nome do equipamento");
+        Console.Clear();
+        Console.WriteLine("Gestão de Equipamentos");
+
+        Console.WriteLine();
+    }
+
+    private Equipamento ObterDados()
+    {
+        Console.Write("Digite o nome do equipamento: ");
         string nome = Console.ReadLine();
 
-        Console.WriteLine("Digite o preço do equipamento");
+        Console.Write("Digite o preço do equipamento: ");
         decimal precoAquisicao = Convert.ToDecimal(Console.ReadLine());
 
-        Console.WriteLine("Digite o numero de série do equipamento");
+        Console.Write("Digite o numero de série do equipamento: ");
         string numeroSerie = Console.ReadLine();
 
-        Console.WriteLine("Digite a data de fabricação do equipamento");
+        Console.Write("Digite a data de fabricação do equipamento: ");
         DateTime dataFabricacao = DateTime.Parse(Console.ReadLine());
 
         VisualizarFabricantes();
 
-        Console.WriteLine("Digite o id do fabricante do equipamento");
+        Console.Write("Digite o id do fabricante do equipamento: ");
         int idFabricante = Convert.ToInt32(Console.ReadLine());
 
         Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarFabricantePorId(idFabricante);
 
-        Equipamento equipamento = new Equipamento();
-        equipamento.nome = nome;
-        equipamento.precoAquisicao = precoAquisicao;
-        equipamento.numeroSerie = numeroSerie;
-        equipamento.fabricante = fabricanteSelecionado;
-        equipamento.datafabricante = dataFabricacao;
+        Equipamento equipamento = new Equipamento(nome, precoAquisicao, numeroSerie, fabricanteSelecionado, dataFabricacao);
 
         return equipamento;
     }
