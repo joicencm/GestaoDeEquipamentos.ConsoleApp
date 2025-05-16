@@ -54,6 +54,8 @@ class TelaFabricante
             Console.Write("\nDigite enter para continuar...");
             Console.ReadLine();
 
+            //Recursão
+            CadastrarRegistro();
             return;
         }
 
