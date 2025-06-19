@@ -28,7 +28,7 @@ public class Fabricante
 
         if (!MailAddress.TryCreate(email, out _))
             erros += "Email deve conter um formato válido \"nome@provedor.com\"!\n";
-        
+
         if (string.IsNullOrWhiteSpace(telefone))
             erros += "O telefone é obrigatório!\n";
 
@@ -38,5 +38,12 @@ public class Fabricante
 
         return erros;
 
+    }
+
+    public void AtualizarRegistro(Fabricante fabricanteAtualizado)
+    {
+        this.nome = fabricanteAtualizado.nome;
+        this.email = fabricanteAtualizado.email;
+        this.telefone = fabricanteAtualizado.telefone;
     }
 }

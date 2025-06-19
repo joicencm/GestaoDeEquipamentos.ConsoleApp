@@ -4,10 +4,10 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 public class RepositorioFabricante
 {
-    public Fabricante[] fabricantes = new Fabricante[100];
-        public int contadorFabricante = 0;
+    private Fabricante[] fabricantes = new Fabricante[100];
+    private int contadorFabricante = 0;
 
-        public void CadastrarFabricante(Fabricante fabricante)
+    public void CadastrarFabricante(Fabricante fabricante)
     {
         fabricantes[contadorFabricante] = fabricante;
         contadorFabricante++;
@@ -20,16 +20,14 @@ public class RepositorioFabricante
         if (fabricanteSelecionado == null)
             return false;
 
-                fabricanteSelecionado.nome = fabricanteAtualizado.nome;
-        fabricanteSelecionado.email = fabricanteAtualizado.email;
-        fabricanteSelecionado.telefone = fabricanteAtualizado.telefone;
+        fabricanteSelecionado.AtualizarRegistro(fabricanteAtualizado);
 
         return true;
     }
 
-        public bool ExcluirFabricante(int idSelecionado)
+    public bool ExcluirFabricante(int idSelecionado)
     {
-        for(int i = 0; i < fabricantes.Length; i++)
+        for (int i = 0; i < fabricantes.Length; i++)
         {
             if (fabricantes[1] == null)
                 continue;
@@ -51,7 +49,7 @@ public class RepositorioFabricante
 
     public Fabricante SelecionarFabricantePorId(int idSelecionado)
     {
-       for(int i = 0; i < fabricantes.Length; i++)
+        for (int i = 0; i < fabricantes.Length; i++)
         {
             Fabricante f = fabricantes[i];
 

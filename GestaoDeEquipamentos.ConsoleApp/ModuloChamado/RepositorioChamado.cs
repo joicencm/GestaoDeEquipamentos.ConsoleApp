@@ -20,11 +20,7 @@ public class RepositorioChamado
         if (chamadoSelecionado == null)
             return false;
 
-
-        chamadoSelecionado.titulo = chamadoAtualizado.titulo;
-        chamadoSelecionado.descricao = chamadoAtualizado.descricao;
-        chamadoSelecionado.dataAbertura = chamadoAtualizado.dataAbertura;
-        chamadoSelecionado.equipamento = chamadoAtualizado.equipamento;
+        chamadoSelecionado.AtualizarRegistro(chamadoAtualizado);
 
         return true;
     }

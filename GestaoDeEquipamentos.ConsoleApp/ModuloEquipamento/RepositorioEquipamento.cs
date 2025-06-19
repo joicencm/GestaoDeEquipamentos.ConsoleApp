@@ -1,69 +1,64 @@
 ﻿namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
 
-        public class RepositorioEquipamento
+public class RepositorioEquipamento
+{
+    private Equipamento[] equipamentos = new Equipamento[100];
+    private int contadorEquipamento = 0;
+    public void CadastrarEquipamento(Equipamento equipamento)
+    {
+        equipamentos[contadorEquipamento] = equipamento;
+        contadorEquipamento++;
+    }
+
+    public bool EditarEquipamento(int idSelecionado, Equipamento equipamentoAtualizado)
+    {
+        Equipamento equipamentoSelecionado = SelecionarEquipamentoPorId(idSelecionado);
+
+        if (equipamentoSelecionado == null)
+            return false;
+
+        equipamentoSelecionado.AtualizarRegistro(equipamentoAtualizado);
+
+        return true;
+
+    }
+
+    public bool ExcluirEquipamento(int idSelecionado)
+    {
+        for (int i = 0; i < equipamentos.Length; i++)
         {
-            private Equipamento[] equipamentos = new Equipamento[100];
-            private int contadorEquipamento = 0;
-            public void CadastrarEquipamento(Equipamento equipamento)
+            if (equipamentos[i] == null)
+                continue;
+
+            if (equipamentos[i].id == idSelecionado)
             {
-                equipamentos[contadorEquipamento] = equipamento;
-                contadorEquipamento++;
-            }           
-
-            public bool EditarEquipamento(int idSelecionado, Equipamento equipamentoAtualizado)
-            {
-                Equipamento equipamentoSelecionado = SelecionarEquipamentoPorId(idSelecionado);
-
-                if (equipamentoSelecionado == null)
-                    return false;
-
-
-                equipamentoSelecionado.nome = equipamentoAtualizado.nome;
-                equipamentoSelecionado.precoAquisicao = equipamentoAtualizado.precoAquisicao;
-                equipamentoSelecionado.numeroSerie = equipamentoAtualizado.numeroSerie;
-                equipamentoSelecionado.fabricante = equipamentoAtualizado.fabricante;
-                equipamentoSelecionado.datafabricante = equipamentoAtualizado.datafabricante;
+                equipamentos[i] = null;
 
                 return true;
-
-            }          
-
-            public bool ExcluirEquipamento(int idSelecionado)
-            {
-                for (int i = 0; i < equipamentos.Length; i++)
-                {
-                    if (equipamentos[i] == null)
-                        continue;
-
-                    if (equipamentos[i].id == idSelecionado)
-                    {
-                        equipamentos[i] = null;
-
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-
-            public Equipamento[] SelecionarEquipamento()
-            {
-                return equipamentos;
-            }
-
-            public Equipamento SelecionarEquipamentoPorId(int idSelecionado)
-            {
-                for (int i = 0; i < equipamentos.Length; i++)
-                {
-                    Equipamento e = equipamentos[i];
-
-                    if (e == null)
-                        continue;
-                    if (e.id == idSelecionado)
-                        return e;
-                }
-
-                return null;
             }
         }
+
+        return false;
+    }
+
+    public Equipamento[] SelecionarEquipamento()
+    {
+        return equipamentos;
+    }
+
+    public Equipamento SelecionarEquipamentoPorId(int idSelecionado)
+    {
+        for (int i = 0; i < equipamentos.Length; i++)
+        {
+            Equipamento e = equipamentos[i];
+
+            if (e == null)
+                continue;
+            if (e.id == idSelecionado)
+                return e;
+        }
+
+        return null;
+    }
+}

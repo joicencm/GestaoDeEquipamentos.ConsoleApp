@@ -12,7 +12,7 @@ class TelaFabricante
     {
         repositorioFabricante = repositorioF;
     }
-  
+
     public char ApresentarMenu()
     {
         ExibirCabecalho();
@@ -43,7 +43,7 @@ class TelaFabricante
 
         string erros = novoFabricante.Validar();
 
-        if(erros.Length >0)
+        if (erros.Length > 0)
         {
             Console.WriteLine();
 
@@ -65,7 +65,7 @@ class TelaFabricante
         Console.ReadLine();
     }
 
-        public void EditarRegistros()
+    public void EditarRegistros()
     {
         ExibirCabecalho();
 
