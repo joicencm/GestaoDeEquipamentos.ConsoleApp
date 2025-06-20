@@ -1,4 +1,5 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 
@@ -139,11 +140,11 @@ public class TelaChamado
             "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
             "Id", "Nome", "Preço de Aquisição", "Número Série", "Fabricante", "Data Fabricação"
             );
-        Equipamento[] equipamentos = repositorioEquipamento.SelecionarEquipamento();
+        EntidadeBase[] equipamentos = repositorioEquipamento.SelecionarRegistros();
 
         for (int i = 0; i < equipamentos.Length; i++)
         {
-            Equipamento e = equipamentos[i];
+            Equipamento e = (Equipamento)equipamentos[i];
 
             if (e == null)
                 continue;
@@ -178,7 +179,7 @@ public class TelaChamado
         Console.Write("Digite o ID do equipmaneto que deseja selecionar: ");
         int idEquipamento = Convert.ToInt32(Console.ReadLine());
 
-        Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarEquipamentoPorId(idEquipamento);
+        Equipamento equipamentoSelecionado = (Equipamento)repositorioEquipamento.SelecionarRegistroPorId(idEquipamento);
 
         Chamado chamado = new Chamado(titulo, descricao, dataAbertura, equipamentoSelecionado);
 

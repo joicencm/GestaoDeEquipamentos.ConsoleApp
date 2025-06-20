@@ -1,10 +1,10 @@
-﻿using System.Net.Mail;
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using System.Net.Mail;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
-public class Fabricante
+public class Fabricante : EntidadeBase
 {
-    public int id;
     public string nome;
     public string email;
     public string telefone;
@@ -40,8 +40,10 @@ public class Fabricante
 
     }
 
-    public void AtualizarRegistro(Fabricante fabricanteAtualizado)
+    public override void AtualizarRegistro(EntidadeBase registroAtualizado)
     {
+        Fabricante fabricanteAtualizado = (Fabricante)registroAtualizado;
+
         this.nome = fabricanteAtualizado.nome;
         this.email = fabricanteAtualizado.email;
         this.telefone = fabricanteAtualizado.telefone;
