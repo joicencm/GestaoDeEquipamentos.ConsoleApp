@@ -1,8 +1,9 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 
-public class RepositorioChamado
+public class RepositorioChamado : RepositorioBase
 {
     public Chamado[] chamados = new Chamado[100];
     public int contadorChamados = 0;

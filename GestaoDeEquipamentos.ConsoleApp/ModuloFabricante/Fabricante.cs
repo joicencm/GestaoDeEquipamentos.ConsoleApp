@@ -16,7 +16,7 @@ public class Fabricante : EntidadeBase
         this.telefone = telefone;
     }
 
-    public string Validar()
+    public override string Validar()
     {
         string erros = "";
 

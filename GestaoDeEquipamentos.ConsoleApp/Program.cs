@@ -9,127 +9,44 @@ class Program
 {
     static void Main(string[] args)
     {
-        RepositorioFabricante repositorioFabricante = new RepositorioFabricante();
-        RepositorioEquipamento repositorioEquipamento = new RepositorioEquipamento();
-        RepositorioChamado repositorioChamado = new RepositorioChamado();
-
-        TelaFabricante telaFabricante = new TelaFabricante(repositorioFabricante);
-
-        TelaEquipamento telaEquipamento = new TelaEquipamento(repositorioEquipamento, repositorioFabricante);
-
-        TelaChamado telaChamado = new TelaChamado(repositorioEquipamento, repositorioChamado);
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
 
         while (true)
         {
-            char telaEscolhida = ApresentarMenuPrincipal();
+            telaPrincipal.ApresentarMenuPrincipal();
 
-            if (telaEscolhida == 'S' || telaEscolhida == 's')
+            TelaBase telaEscolhida = telaPrincipal.ObterTela();
+
+            if (telaEscolhida == null)
                 break;
 
-            if (telaEscolhida == '1')
-            {
-                char opcaoEscolhida = telaFabricante.ApresentarMenu();
+            char opcaoEscolhida = telaEscolhida.ApresentarMenu();
 
-                if (opcaoEscolhida == 'S')
+            if (opcaoEscolhida == 'S')
+                break;
+
+            switch (opcaoEscolhida)
+            {
+                case '1':
+                    telaEscolhida.CadastrarRegistro();
                     break;
 
-                switch (opcaoEscolhida)
-                {
-                    case '1':
-                        telaFabricante.CadastrarRegistro();
-                        break;
-
-                    case '2':
-                        telaFabricante.VisualizarRegistros(true);
-                        break;
-
-                    case '3':
-                        telaFabricante.EditarRegistros();
-                        break;
-
-                    case '4':
-                        telaFabricante.ExcluirRegistros();
-                        break;
-                }
-            }
-
-            else if (telaEscolhida == '2')
-            {
-                char opcaoEscolhida = telaEquipamento.ApresentarMenu();
-
-                if (opcaoEscolhida == 'S')
+                case '2':
+                    telaEscolhida.VisualizarRegistros(true);
                     break;
 
-                switch (opcaoEscolhida)
-                {
-                    case '1':
-                        telaEquipamento.CadastrarRegistro();
-                        break;
-
-                    case '2':
-                        telaEquipamento.VisualizarRegistros(true);
-                        break;
-
-                    case '3':
-                        telaEquipamento.EditarRegistros();
-                        break;
-
-                    case '4':
-                        telaEquipamento.ExcluirRegistros();
-                        break;
-                }
-            }
-
-            else if (telaEscolhida == '3')
-            {
-                char opcaoEscolhida = telaChamado.ApresentarMenu();
-
-                if (opcaoEscolhida == 'S')
+                case '3':
+                    telaEscolhida.EditarRegistros();
                     break;
 
-                switch (opcaoEscolhida)
-                {
-                    case '1':
-                        telaChamado.CadastrarRegistro();
-                        break;
+                case '4':
+                    telaEscolhida.ExcluirRegistros();
+                    break;
 
-                    case '2':
-                        telaChamado.VisualizarRegistros(true);
-                        break;
-
-                    case '3':
-                        telaChamado.EditarRegistros();
-                        break;
-
-                    case '4':
-                        telaChamado.ExcluirRegistros();
-                        break;
-                }
             }
+
+
         }
     }
 
-    public static char ApresentarMenuPrincipal()
-    {
-        Console.Clear();
-
-        Console.WriteLine("----------------------------------------");
-        Console.WriteLine("|        Gestão de Equipamentos        |");
-        Console.WriteLine("----------------------------------------");
-
-        Console.WriteLine();
-
-        Console.WriteLine("1 - Controle de Fabricantes");
-        Console.WriteLine("2 - Controle de Equipamentos");
-        Console.WriteLine("3 - Controle de Chamados");
-        Console.WriteLine("S - Sair");
-
-        Console.WriteLine();
-
-        Console.Write("Escolha uma das opções: ");
-        char opcaoEscolhida = Console.ReadLine().ToUpper()[0];
-
-
-        return opcaoEscolhida;
-    }
 }

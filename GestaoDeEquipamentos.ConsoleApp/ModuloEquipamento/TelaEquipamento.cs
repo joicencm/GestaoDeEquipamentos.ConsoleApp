@@ -3,105 +3,21 @@ using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
-public class TelaEquipamento
+public class TelaEquipamento : TelaBase
 {
     private RepositorioEquipamento repositorioEquipamento;
     private RepositorioFabricante repositorioFabricante;
 
-    public TelaEquipamento(RepositorioEquipamento repositorioE, RepositorioFabricante repositorioF)
+    public TelaEquipamento(
+        RepositorioEquipamento repositorioEquipamento,
+        RepositorioFabricante repositorioFabricante
+        ) : base("Equipamento", repositorioEquipamento)
     {
-        this.repositorioEquipamento = repositorioE;
-        this.repositorioFabricante = repositorioF;
+        this.repositorioEquipamento = repositorioEquipamento;
+        this.repositorioFabricante = repositorioFabricante;
     }
 
-    public char ApresentarMenu()
-    {
-        ExibirCabecalho();
-
-        Console.WriteLine("1 - Cadastro de Equipamentos");
-        Console.WriteLine("2 - Visualizar Equipamentos");
-        Console.WriteLine("3 - Editar Equipamentos");
-        Console.WriteLine("4 - Excluir Equipamentos");
-        Console.WriteLine("S - Sair");
-
-        Console.Write("Digite uma opção válida: ");
-        char opcaoEscolhida = Console.ReadLine().ToUpper()[0];
-
-        return opcaoEscolhida;
-    }
-
-    internal void CadastrarRegistro()
-    {
-        Console.Clear();
-        Console.WriteLine("Gestão de Equipamentos");
-        Console.WriteLine();
-
-        Console.WriteLine("Cadastro de Equipamentos");
-        Equipamento equipamento = ObterDados();
-
-        repositorioEquipamento.CadastrarRegistro(equipamento);
-
-        Console.WriteLine($"\nEquipamento \"{equipamento.nome}\" cadastro com sucesso");
-        Console.ReadLine();
-
-    }
-
-    public void EditarRegistros()
-    {
-        ExibirCabecalho();
-
-        Console.WriteLine("Edição de Equipamentos");
-
-        Console.WriteLine();
-
-        VisualizarRegistros(false);
-
-        Console.Write("Ditite o id do registro que deseja selecionar: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine());
-
-        Equipamento equipamentoAtualizado = ObterDados();
-
-        bool conseguiuEditar = repositorioEquipamento.EditarRegistro(idSelecionado, equipamentoAtualizado);
-
-        if (!conseguiuEditar)
-        {
-            Console.WriteLine("Não foi possivel encontrar o registro selecionado.");
-            Console.ReadLine();
-
-            return;
-        }
-        Console.WriteLine($"\nEquipamento \"{equipamentoAtualizado.nome}\" editado com sucesso");
-        Console.ReadLine();
-    }
-
-    public void ExcluirRegistros()
-    {
-        ExibirCabecalho();
-
-        Console.WriteLine("Exclusão de Equipamentos");
-
-        Console.WriteLine();
-
-        VisualizarRegistros(false);
-
-        Console.Write("Ditite o id do registro que deseja selecionar: ");
-        int idSelecionado = Convert.ToInt32(Console.ReadLine());
-
-        bool conseguiuExluir = repositorioEquipamento.ExcluirRegistro(idSelecionado);
-
-        if (!conseguiuExluir)
-        {
-            Console.WriteLine("Não foi possivel encontrar o registro selecionado.");
-            Console.ReadLine();
-
-            return;
-        }
-
-        Console.WriteLine($"\nEquipamento excluído com sucesso");
-        Console.ReadLine();
-    }
-
-    public void VisualizarRegistros(bool exibirCabecalho)
+    public override void VisualizarRegistros(bool exibirCabecalho)
     {
         if (exibirCabecalho == true)
             ExibirCabecalho();
@@ -124,7 +40,7 @@ public class TelaEquipamento
 
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
-            e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante.nome, e.datafabricante.ToShortDateString()
+            e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante.nome, e.dataFabricacao.ToShortDateString()
             );
         }
 
@@ -160,16 +76,7 @@ public class TelaEquipamento
 
         Console.ReadLine();
     }
-
-    private void ExibirCabecalho()
-    {
-        Console.Clear();
-        Console.WriteLine("Gestão de Equipamentos");
-
-        Console.WriteLine();
-    }
-
-    private Equipamento ObterDados()
+    protected override Equipamento ObterDados()
     {
         Console.Write("Digite o nome do equipamento: ");
         string nome = Console.ReadLine();
