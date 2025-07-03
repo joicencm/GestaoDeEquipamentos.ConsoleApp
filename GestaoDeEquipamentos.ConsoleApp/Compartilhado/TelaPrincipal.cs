@@ -53,7 +53,7 @@ public class TelaPrincipal
         char opcaoEscolhida = Console.ReadLine().ToUpper()[0];
     }
 
-    public TelaBase ObterTela()
+    public ITela ObterTela()
     {
         if (opcaoEscolhida == '1')
             return telaEquipamento;

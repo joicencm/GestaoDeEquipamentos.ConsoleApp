@@ -3,7 +3,7 @@ using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
-public class TelaEquipamento : TelaBase
+public class TelaEquipamento : TelaBase<Equipamento>, ITela
 {
     private RepositorioEquipamento repositorioEquipamento;
     private RepositorioFabricante repositorioFabricante;
@@ -29,14 +29,10 @@ public class TelaEquipamento : TelaBase
             "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
             "Id", "Nome", "Preço de Aquisição", "Número Série", "Fabricante", "Data Fabricação"
             );
-        EntidadeBase[] equipamentos = repositorioEquipamento.SelecionarRegistros();
+        List<Equipamento> equipamentos = repositorioEquipamento.SelecionarRegistros();
 
-        for (int i = 0; i < equipamentos.Length; i++)
+        foreach (Equipamento e in equipamentos)
         {
-            Equipamento e = (Equipamento)equipamentos[i];
-
-            if (e == null)
-                continue;
 
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
@@ -59,19 +55,14 @@ public class TelaEquipamento : TelaBase
             "Id", "Nome", "Email", "Telefone"
             );
 
-        object[] fabricantes = repositorioFabricante.SelecionarRegistros();
+        List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
 
-        for (int i = 0; i < fabricantes.Length; i++)
+        foreach (Fabricante f in fabricantes)
         {
-            Fabricante f = (Fabricante)fabricantes[i];
-
-            if (f == null)
-                continue;
-
             Console.WriteLine(
-                "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
-                f.id, f.nome, f.email, f.telefone
-                );
+             "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
+             f.id, f.nome, f.email, f.telefone
+     );
         }
 
         Console.ReadLine();
@@ -97,7 +88,12 @@ public class TelaEquipamento : TelaBase
 
         Fabricante fabricanteSelecionado = (Fabricante)repositorioFabricante.SelecionarRegistroPorId(idFabricante);
 
-        Equipamento equipamento = new Equipamento(nome, precoAquisicao, numeroSerie, fabricanteSelecionado, dataFabricacao);
+        Equipamento equipamento = new Equipamento(
+            nome,
+            precoAquisicao,
+            numeroSerie,
+            fabricanteSelecionado,
+            dataFabricacao);
 
         return equipamento;
     }

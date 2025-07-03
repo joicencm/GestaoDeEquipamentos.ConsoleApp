@@ -1,13 +1,14 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using System.Net.Mail;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
-public class Fabricante : EntidadeBase
+public class Fabricante : EntidadeBase<Fabricante>
 {
-    public string nome;
-    public string email;
-    public string telefone;
+    public string nome { get; set; }
+    public string email { get; set; }
+    public string telefone { get; set; }
 
     public Fabricante(string nome, string email, string telefone)
     {
@@ -40,7 +41,7 @@ public class Fabricante : EntidadeBase
 
     }
 
-    public override void AtualizarRegistro(EntidadeBase registroAtualizado)
+    public override void AtualizarRegistro(Fabricante registroAtualizado)
     {
         Fabricante fabricanteAtualizado = (Fabricante)registroAtualizado;
 

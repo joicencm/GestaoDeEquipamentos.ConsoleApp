@@ -3,16 +3,19 @@ using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 
-public class Chamado : EntidadeBase
+public class Chamado : EntidadeBase<Chamado>
 {
-    public int id;
-    public string titulo;
-    public string descricao;
-    public DateTime dataAbertura;
+    public string titulo { get; set; }
+    public string descricao { get; set; }
+    public DateTime dataAbertura { get; set; }
+    public Equipamento equipamento { get; set; }
 
-    public Equipamento equipamento;
-
-    public Chamado(string titulo, string descricao, DateTime dataAbertura, Equipamento equipamento)
+    public Chamado(
+        string titulo,
+        string descricao,
+        DateTime dataAbertura,
+        Equipamento equipamento
+        )
     {
         this.titulo = titulo;
         this.descricao = descricao;
@@ -20,7 +23,7 @@ public class Chamado : EntidadeBase
         this.equipamento = equipamento;
     }
 
-    public override void AtualizarRegistro(EntidadeBase registroAtualizado)
+    public override void AtualizarRegistro(Chamado registroAtualizado)
     {
         Chamado chamadoAtualizado = (Chamado)registroAtualizado;
 

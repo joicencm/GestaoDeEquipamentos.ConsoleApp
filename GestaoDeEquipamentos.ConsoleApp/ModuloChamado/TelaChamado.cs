@@ -3,7 +3,7 @@ using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 
-public class TelaChamado : TelaBase
+public class TelaChamado : TelaBase<Chamado>, ITela
 {
     private RepositorioChamado repositorioChamado;
     private RepositorioEquipamento repositorioEquipamento;
@@ -29,19 +29,15 @@ public class TelaChamado : TelaBase
             "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20}",
             "Id", "Titulo", "Descrição", "data de Abertura", "Equipamento"
             );
-        Chamado[] chamados = repositorioChamado.SelecionarChamado();
 
-        for (int i = 0; i < chamados.Length; i++)
+        List<Chamado> chamados = repositorioChamado.SelecionarRegistros();
+
+        foreach (Chamado c in chamados)
         {
-            Chamado c = chamados[i];
-
-            if (c == null)
-                continue;
-
             Console.WriteLine(
-                "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20}",
-            c.id, c.titulo, c.descricao, c.dataAbertura.ToShortDateString(), c.equipamento.nome
-            );
+         "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20}",
+        c.id, c.titulo, c.descricao, c.dataAbertura.ToShortDateString(), c.equipamento.nome
+     );
         }
 
         Console.ReadLine();
@@ -62,7 +58,8 @@ public class TelaChamado : TelaBase
         Console.Write("Digite o ID do equipmaneto que deseja selecionar: ");
         int idEquipamento = Convert.ToInt32(Console.ReadLine());
 
-        Equipamento equipamentoSelecionado = (Equipamento)repositorioEquipamento.SelecionarRegistroPorId(idEquipamento);
+        Equipamento equipamentoSelecionado =
+            repositorioEquipamento.SelecionarRegistroPorId(idEquipamento);
 
         Chamado chamado = new Chamado(titulo, descricao, dataAbertura, equipamentoSelecionado);
 
@@ -78,19 +75,15 @@ public class TelaChamado : TelaBase
             "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
             "Id", "Nome", "Preço de Aquisição", "Número Série", "Fabricante", "Data Fabricação"
             );
-        EntidadeBase[] equipamentos = repositorioEquipamento.SelecionarRegistros();
 
-        for (int i = 0; i < equipamentos.Length; i++)
+        List<Equipamento> equipamentos = repositorioEquipamento.SelecionarRegistros();
+
+        foreach (Equipamento e in equipamentos)
         {
-            Equipamento e = (Equipamento)equipamentos[i];
-
-            if (e == null)
-                continue;
-
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
-            e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante.nome, e.dataFabricacao.ToShortDateString()
-            );
+                e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante.nome, e.dataFabricacao.ToShortDateString()
+);
         }
 
         Console.ReadLine();

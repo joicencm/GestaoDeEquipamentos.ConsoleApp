@@ -4,7 +4,7 @@ using System.ComponentModel.Design;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
-public class Equipamento : EntidadeBase
+public class Equipamento : EntidadeBase<Equipamento>
 {
     public int id;
     public string nome;
@@ -23,7 +23,7 @@ public class Equipamento : EntidadeBase
         this.dataFabricacao = dataFabricacao;
     }
 
-    public override void AtualizarRegistro(EntidadeBase registroAtualizado)
+    public override void AtualizarRegistro(Equipamento registroAtualizado)
     {
         Equipamento equipamentoAtualizado = (Equipamento)registroAtualizado;
 

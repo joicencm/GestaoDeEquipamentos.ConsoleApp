@@ -1,7 +1,4 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
-using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
-using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
-using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp;
 
@@ -15,7 +12,7 @@ class Program
         {
             telaPrincipal.ApresentarMenuPrincipal();
 
-            TelaBase telaEscolhida = telaPrincipal.ObterTela();
+            ITela telaEscolhida = telaPrincipal.ObterTela();
 
             if (telaEscolhida == null)
                 break;
@@ -36,11 +33,11 @@ class Program
                     break;
 
                 case '3':
-                    telaEscolhida.EditarRegistros();
+                    telaEscolhida.EditarRegistro();
                     break;
 
                 case '4':
-                    telaEscolhida.ExcluirRegistros();
+                    telaEscolhida.ExcluirRegistro();
                     break;
 
             }
