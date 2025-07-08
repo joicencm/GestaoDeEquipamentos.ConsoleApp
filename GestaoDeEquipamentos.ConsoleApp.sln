@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.ConsoleApp", "GestaoDeEquipamentos.ConsoleApp\GestaoDeEquipamentos.ConsoleApp.csproj", "{BDCA9A67-F986-4275-A6C3-A621DFCD9723}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Apresentação", "1. Apresentação", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domínio", "2.Domínio", "{2D7BD6F1-F972-4738-8EF8-172893B1A737}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Infraestrutura", "3.Infraestrutura", "{8BCC39E1-A3C7-4305-AFBC-4EC1DE3DF8E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.Dominio", "GestaoDeEquipamentos.Dominio\GestaoDeEquipamentos.Dominio.csproj", "{842F15D9-6BC2-48E8-9CB0-EBD666B00236}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoDeEquipamentos.Infraestrutura.Memoria", "GestaoDeEquipamentos.Infraestrutura.Memoria\GestaoDeEquipamentos.Infraestrutura.Memoria.csproj", "{EC5A3E04-77B3-4D2A-BB83-28D5CD2F75F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,22 @@ Global
 		{BDCA9A67-F986-4275-A6C3-A621DFCD9723}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDCA9A67-F986-4275-A6C3-A621DFCD9723}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDCA9A67-F986-4275-A6C3-A621DFCD9723}.Release|Any CPU.Build.0 = Release|Any CPU
+		{842F15D9-6BC2-48E8-9CB0-EBD666B00236}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{842F15D9-6BC2-48E8-9CB0-EBD666B00236}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{842F15D9-6BC2-48E8-9CB0-EBD666B00236}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{842F15D9-6BC2-48E8-9CB0-EBD666B00236}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5A3E04-77B3-4D2A-BB83-28D5CD2F75F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5A3E04-77B3-4D2A-BB83-28D5CD2F75F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5A3E04-77B3-4D2A-BB83-28D5CD2F75F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5A3E04-77B3-4D2A-BB83-28D5CD2F75F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BDCA9A67-F986-4275-A6C3-A621DFCD9723} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{842F15D9-6BC2-48E8-9CB0-EBD666B00236} = {2D7BD6F1-F972-4738-8EF8-172893B1A737}
+		{EC5A3E04-77B3-4D2A-BB83-28D5CD2F75F9} = {8BCC39E1-A3C7-4305-AFBC-4EC1DE3DF8E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7EE5048E-DCBE-4E20-991E-FFBEA1941B79}

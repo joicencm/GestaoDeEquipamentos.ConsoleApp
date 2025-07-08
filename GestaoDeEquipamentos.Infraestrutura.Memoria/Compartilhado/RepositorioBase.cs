@@ -1,6 +1,6 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+﻿using GestaoDeEquipamentos.Dominio.Compartilhado;
 
-namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+namespace GestaoDeEquipamentos.Infraestrutura.Compartilhado;
 
 public abstract class RepositorioBase<Tipo> where Tipo : EntidadeBase<Tipo>
 {
