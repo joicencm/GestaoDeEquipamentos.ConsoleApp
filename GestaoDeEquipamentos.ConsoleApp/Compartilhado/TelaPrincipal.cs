@@ -1,9 +1,11 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
-using GestaoDeEquipamentos.Infraestrutura.ModuloChamado;
-using GestaoDeEquipamentos.Infraestrutura.ModuloEquipamento;
-using GestaoDeEquipamentos.Infraestrutura.ModuloFabricante;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos.ModuloFabricante;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos.ModuloEquipamento;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos.ModuloChamado;
+
 
 namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 
@@ -11,9 +13,11 @@ public class TelaPrincipal
 {
     private char opcaoEscolhida;
 
-    private RepositorioFabricante repositorioFabricante;
-    private RepositorioEquipamento repositorioEquipamento;
-    private RepositorioChamado repositorioChamado;
+    private ContextoDados contextoDados;
+
+    private RepositorioFabricanteEmArquivo repositorioFabricante;
+    private RepositorioEquipamentoEmArquivo repositorioEquipamento;
+    private RepositorioChamadoEmArquivo repositorioChamado;
 
     private TelaFabricante telaFabricante;
     private TelaEquipamento telaEquipamento;
@@ -21,9 +25,11 @@ public class TelaPrincipal
 
     public TelaPrincipal()
     {
-        repositorioFabricante = new RepositorioFabricante();
-        repositorioEquipamento = new RepositorioEquipamento();
-        repositorioChamado = new RepositorioChamado();
+        contextoDados = new ContextoDados(true);
+
+        repositorioFabricante = new RepositorioFabricanteEmArquivo(contextoDados);
+        repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contextoDados);
+        repositorioChamado = new RepositorioChamadoEmArquivo(contextoDados);
 
         telaFabricante = new TelaFabricante(repositorioFabricante);
 
@@ -45,27 +51,27 @@ public class TelaPrincipal
 
         Console.WriteLine();
 
-        Console.WriteLine("1 - Controle de Equipamentos");
-        Console.WriteLine("2 - Controle de Chamados");
-        Console.WriteLine("3 - Controle de Fabricantes");
+        Console.WriteLine("1 - Controle de Fabricantes");
+        Console.WriteLine("2 - Controle de Equipamentos");
+        Console.WriteLine("3 - Controle de Chamados");
         Console.WriteLine("S - Sair");
 
         Console.WriteLine();
 
         Console.Write("Escolha uma das opções: ");
-        char opcaoEscolhida = Console.ReadLine().ToUpper()[0];
+        opcaoEscolhida = Console.ReadLine()[0];
     }
 
-    public ITela ObterTela()
+    public ITela? ObterTela()
     {
         if (opcaoEscolhida == '1')
-            return telaEquipamento;
+            return telaFabricante;
 
         else if (opcaoEscolhida == '2')
-            return telaChamado;
+            return telaEquipamento;
 
         else if (opcaoEscolhida == '3')
-            return telaFabricante;
+            return telaChamado;
 
         return null;
     }

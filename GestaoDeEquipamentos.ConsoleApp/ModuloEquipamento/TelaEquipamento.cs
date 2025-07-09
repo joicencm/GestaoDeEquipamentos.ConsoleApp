@@ -1,19 +1,20 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 using GestaoDeEquipamentos.Dominio.ModuloEquipamento;
 using GestaoDeEquipamentos.Dominio.ModuloFabricante;
-using GestaoDeEquipamentos.Infraestrutura.ModuloEquipamento;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos.ModuloEquipamento;
+using GestaoDeEquipamentos.Infraestrutura.Arquivos.ModuloFabricante;
 using GestaoDeEquipamentos.Infraestrutura.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
 public class TelaEquipamento : TelaBase<Equipamento>, ITela
 {
-    private RepositorioEquipamento repositorioEquipamento;
-    private RepositorioFabricante repositorioFabricante;
+    private RepositorioEquipamentoEmArquivo repositorioEquipamento;
+    private RepositorioFabricanteEmArquivo repositorioFabricante;
 
     public TelaEquipamento(
-        RepositorioEquipamento repositorioEquipamento,
-        RepositorioFabricante repositorioFabricante
+        RepositorioEquipamentoEmArquivo repositorioEquipamento,
+        RepositorioFabricanteEmArquivo repositorioFabricante
         ) : base("Equipamento", repositorioEquipamento)
     {
         this.repositorioEquipamento = repositorioEquipamento;
@@ -39,7 +40,7 @@ public class TelaEquipamento : TelaBase<Equipamento>, ITela
 
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
-            e.id, e.nome, e.precoAquisicao.ToString("C2"), e.numeroSerie, e.fabricante.nome, e.dataFabricacao.ToShortDateString()
+            e.id, e.Nome, e.PrecoAquisicao.ToString("C2"), e.NumeroSerie, e.Fabricante.nome, e.DataFabricacao.ToShortDateString()
             );
         }
 

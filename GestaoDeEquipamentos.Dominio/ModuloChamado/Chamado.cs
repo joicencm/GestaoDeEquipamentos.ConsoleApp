@@ -10,12 +10,14 @@ public class Chamado : EntidadeBase<Chamado>
     public DateTime dataAbertura { get; set; }
     public Equipamento equipamento { get; set; }
 
+    public Chamado() { }
+
     public Chamado(
         string titulo,
         string descricao,
         DateTime dataAbertura,
         Equipamento equipamento
-        )
+        ) : this()
     {
         this.titulo = titulo;
         this.descricao = descricao;

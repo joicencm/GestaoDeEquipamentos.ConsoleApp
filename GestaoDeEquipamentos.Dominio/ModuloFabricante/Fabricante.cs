@@ -9,6 +9,8 @@ public class Fabricante : EntidadeBase<Fabricante>
     public string email { get; set; }
     public string telefone { get; set; }
 
+    public Fabricante() { }
+
     public Fabricante(string nome, string email, string telefone)
     {
         this.nome = nome;
