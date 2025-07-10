@@ -1,0 +1,16 @@
+﻿@using GestaoDeEquipamentos.Dominio.ModuloFabricante
+
+@model List<Fabricante>
+
+<h1>Visualização de Fabricante</h1>
+
+<hr />
+
+<a href="/Fabricante/Cadastrar">Cadastrar Novo Fabricante</a>
+
+<ul>
+    @foreach (Fabricante fabricante in Model)
+    {
+        <li>@fabricante.nome / @fabricante.email / @fabricante.telefone</li>
+    }
+</ul>
