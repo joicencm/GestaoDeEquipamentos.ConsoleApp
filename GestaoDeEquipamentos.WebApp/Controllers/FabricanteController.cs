@@ -33,7 +33,50 @@ namespace GestaoDeEquipamentos.WebApp.Controllers
 
             repositorioFabricante.CadastrarRegistro(novoFabricante);
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public IActionResult Editar(int id)
+        {
+            Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
+
+            if (fabricanteSelecionado == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(fabricanteSelecionado);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(int id, string nome, string email, string telefone)
+        {
+            Fabricante fabricanteEditado = new Fabricante(nome, email, telefone);
+
+            bool edicaoConcluida = repositorioFabricante.EditarRegistro(id, fabricanteEditado);
+
+            if (!edicaoConcluida)
+            {
+                fabricanteEditado.id = id;
+                return View(fabricanteEditado);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Excluir(int id)
+        {
+            Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
+
+            if (fabricanteSelecionado == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(fabricanteSelecionado);
+        }
+
+        public IActionResult ExcluirConfirmado(int id)
+        {
+            repositorioFabricante.ExcluirRegistro(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

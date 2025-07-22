@@ -5,7 +5,7 @@ namespace GestaoDeEquipamentos.Infraestrutura.Compartilhado;
 public abstract class RepositorioBase<Tipo> where Tipo : EntidadeBase<Tipo>
 {
     protected List<Tipo> registros = new List<Tipo>();
-    protected static int contadorIds = 0;
+    protected static int contadorIds = 1;
 
     public void CadastrarRegistro(Tipo novoRegistro)
     {
