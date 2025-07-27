@@ -34,7 +34,7 @@ public class TelaFabricante : TelaBase<Fabricante>, ITela
         {
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -30} | {3,  -15}",
-                f.id, f.nome, f.email, f.telefone
+                f.Id, f.Nome, f.Email, f.Telefone
             );
         }
 

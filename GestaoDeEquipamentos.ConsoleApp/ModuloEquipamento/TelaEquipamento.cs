@@ -40,7 +40,7 @@ public class TelaEquipamento : TelaBase<Equipamento>, ITela
 
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
-            e.id, e.Nome, e.PrecoAquisicao.ToString("C2"), e.NumeroSerie, e.Fabricante.nome, e.DataFabricacao.ToShortDateString()
+            e.Id, e.Nome, e.PrecoAquisicao.ToString("C2"), e.NumeroSerie, e.Fabricante.Nome, e.DataFabricacao.ToShortDateString()
             );
         }
 
@@ -65,7 +65,7 @@ public class TelaEquipamento : TelaBase<Equipamento>, ITela
         {
             Console.WriteLine(
              "{0, -10} | {1, -20} | {2, -30} | {3, -15}",
-             f.id, f.nome, f.email, f.telefone
+             f.Id, f.Nome, f.Email, f.Telefone
      );
         }
 

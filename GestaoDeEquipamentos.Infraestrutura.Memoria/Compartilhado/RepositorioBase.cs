@@ -5,11 +5,11 @@ namespace GestaoDeEquipamentos.Infraestrutura.Compartilhado;
 public abstract class RepositorioBase<Tipo> where Tipo : EntidadeBase<Tipo>
 {
     protected List<Tipo> registros = new List<Tipo>();
-    protected static int contadorIds = 1;
+    protected static int contadorIds = 0;
 
     public void CadastrarRegistro(Tipo novoRegistro)
     {
-        novoRegistro.id = ++contadorIds; ;
+        novoRegistro.Id = ++contadorIds; ;
 
         registros.Add(novoRegistro);
     }
@@ -49,7 +49,7 @@ public abstract class RepositorioBase<Tipo> where Tipo : EntidadeBase<Tipo>
     {
         foreach (Tipo registro in registros)
         {
-            if (registro.id.Equals(idSelecionado))
+            if (registro.Id.Equals(idSelecionado))
                 return registro;
         }
 

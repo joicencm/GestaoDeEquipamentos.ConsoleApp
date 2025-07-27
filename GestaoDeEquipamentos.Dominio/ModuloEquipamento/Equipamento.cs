@@ -14,6 +14,19 @@ public class Equipamento : EntidadeBase<Equipamento>
     public Equipamento() { }
 
     public Equipamento(
+       string nome,
+       decimal precoAquisicao,
+       DateTime dataFabricacao,
+       Fabricante fabricante) : this()
+
+    {
+        Nome = nome;
+        PrecoAquisicao = precoAquisicao;
+        Fabricante = fabricante;
+        DataFabricacao = dataFabricacao;
+    }
+
+    public Equipamento(
         string nome,
         decimal precoAquisicao,
         string numeroSerie,
@@ -26,17 +39,6 @@ public class Equipamento : EntidadeBase<Equipamento>
         NumeroSerie = numeroSerie;
         Fabricante = fabricante;
         DataFabricacao = dataFabricacao;
-    }
-
-    public override void AtualizarRegistro(Equipamento registroAtualizado)
-    {
-        Equipamento equipamentoAtualizado = (Equipamento)registroAtualizado;
-
-        this.Nome = equipamentoAtualizado.Nome;
-        this.PrecoAquisicao = equipamentoAtualizado.PrecoAquisicao;
-        this.NumeroSerie = equipamentoAtualizado.NumeroSerie;
-        this.Fabricante = equipamentoAtualizado.Fabricante;
-        this.DataFabricacao = equipamentoAtualizado.DataFabricacao;
     }
 
     public override string Validar()
@@ -56,5 +58,14 @@ public class Equipamento : EntidadeBase<Equipamento>
             erros += "O campo \"Data de Fabricação\" deve conter uma data passada.\n";
 
         return erros;
+    }
+
+    public override void AtualizarRegistro(Equipamento registroAtualizado)
+    {
+        Nome = registroAtualizado.Nome;
+        PrecoAquisicao = registroAtualizado.PrecoAquisicao;
+        NumeroSerie = registroAtualizado.NumeroSerie;
+        Fabricante = registroAtualizado.Fabricante;
+        DataFabricacao = registroAtualizado.DataFabricacao;
     }
 }

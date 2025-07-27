@@ -5,20 +5,29 @@ namespace GestaoDeEquipamentos.Infraestrutura.Compartilhado;
 
 public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<Tipo>
 {
-    protected List<Tipo> registros = new List<Tipo>();
-    protected static int contadorIds = 0;
-
     protected ContextoDados contexto;
+    protected List<Tipo> registros;
+    protected int contadorIds = 0;
 
     protected RepositorioBaseEmArquivo(ContextoDados contexto)
     {
         this.contexto = contexto;
         this.registros = ObterRegistros();
+
+        int maiorId = 0;
+
+        foreach (Tipo registro in registros)
+        {
+            if (registro.Id > contadorIds)
+                maiorId = registro.Id;
+        }
+
+        contadorIds = maiorId;
     }
 
     public void CadastrarRegistro(Tipo novoRegistro)
     {
-        novoRegistro.id = ++contadorIds; ;
+        novoRegistro.Id = ++contadorIds;
 
         registros.Add(novoRegistro);
 
@@ -29,10 +38,12 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
     {
         Tipo registroSelecionado = SelecionarRegistroPorId(idSelecionado);
 
-        if (registroSelecionado == null)
+        if (registroSelecionado is null)
             return false;
 
         registroSelecionado.AtualizarRegistro(registroAtualizado);
+
+        contexto.Salvar();
 
         return true;
     }
@@ -47,6 +58,8 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
 
             registros.Remove(registroSelecionado);
 
+            contexto.Salvar();
+
             return true;
         }
     }
@@ -60,7 +73,7 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
     {
         foreach (Tipo registro in registros)
         {
-            if (registro.id.Equals(idSelecionado))
+            if (registro.Id.Equals(idSelecionado))
                 return registro;
         }
 

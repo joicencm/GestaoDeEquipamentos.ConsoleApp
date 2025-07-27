@@ -4,69 +4,68 @@ using GestaoDeEquipamentos.Dominio.ModuloFabricante;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado
+namespace GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado;
+
+public class ContextoDados
 {
-    public class ContextoDados
+    public List<Fabricante> Fabricantes { get; set; }
+    public List<Equipamento> Equipamentos { get; set; }
+    public List<Chamado> Chamados { get; set; }
+
+    private string pastaArmazenamento = "C:\\temp";
+    private string arquivoArmazenamento = "dados.json";
+
+    public ContextoDados()
     {
-        public List<Fabricante> Fabricantes { get; set; }
-        public List<Equipamento> Equipamentos { get; set; }
-        public List<Chamado> Chamados { get; set; }
+        Fabricantes = new List<Fabricante>();
+        Equipamentos = new List<Equipamento>();
+        Chamados = new List<Chamado>();
+    }
 
-        private string pastaArmazenamento = "C:\\temp";
-        private string arquivoArmazenamento = "dados.json";
+    public ContextoDados(bool carregarDados) : this()
+    {
+        if (carregarDados)
+            Carregar();
+    }
 
-        public ContextoDados()
-        {
-            Fabricantes = new List<Fabricante>();
-            Equipamentos = new List<Equipamento>();
-            Chamados = new List<Chamado>();
-        }
+    public void Salvar()
+    {
+        string caminhoCompleto = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
 
-        public ContextoDados(bool carregarDados) : this()
-        {
-            if (carregarDados)
-                Carregar();
-        }
+        JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
+        jsonOptions.WriteIndented = true;
+        jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
 
-        public void Salvar()
-        {
-            string caminhoCompleto = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
+        string conteudoJson = JsonSerializer.Serialize(this, jsonOptions);
 
-            JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
-            jsonOptions.WriteIndented = true;
-            jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
+        Directory.CreateDirectory(pastaArmazenamento);
 
-            string conteudoJson = JsonSerializer.Serialize(this, jsonOptions);
+        File.WriteAllText(caminhoCompleto, conteudoJson);
 
-            Directory.CreateDirectory(pastaArmazenamento);
+    }
 
-            File.WriteAllText(caminhoCompleto, conteudoJson);
+    public void Carregar()
+    {
+        string caminhoCompleto = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
 
-        }
+        if (!File.Exists(caminhoCompleto))
+            return;
 
-        public void Carregar()
-        {
-            string caminhoCompleto = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
+        string conteudoJson = File.ReadAllText(caminhoCompleto);
 
-            if (!File.Exists(caminhoCompleto))
-                return;
+        if (string.IsNullOrWhiteSpace(caminhoCompleto))
+            return;
 
-            string conteutoJson = File.ReadAllText(caminhoCompleto);
+        JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
+        jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
 
-            if (string.IsNullOrWhiteSpace(caminhoCompleto))
-                return;
+        ContextoDados contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(conteudoJson, jsonOptions)!;
 
-            JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
-            jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
+        if (contextoArmazenado == null)
+            return;
 
-            ContextoDados contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(conteutoJson, jsonOptions)!;
-
-            if (contextoArmazenado == null)
-                return;
-
-            this.Fabricantes = contextoArmazenado.Fabricantes;
-            this.Equipamentos = contextoArmazenado.Equipamentos;
-            this.Chamados = contextoArmazenado.Chamados;
-        }
+        this.Fabricantes = contextoArmazenado.Fabricantes;
+        this.Equipamentos = contextoArmazenado.Equipamentos;
+        this.Chamados = contextoArmazenado.Chamados;
     }
 }

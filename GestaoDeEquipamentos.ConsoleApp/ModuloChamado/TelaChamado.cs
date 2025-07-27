@@ -39,7 +39,7 @@ public class TelaChamado : TelaBase<Chamado>, ITela
         {
             Console.WriteLine(
          "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20}",
-        c.id, c.titulo, c.descricao, c.dataAbertura.ToShortDateString(), c.equipamento.Nome
+        c.Id, c.titulo, c.descricao, c.dataAbertura.ToShortDateString(), c.equipamento.Nome
      );
         }
 
@@ -85,7 +85,7 @@ public class TelaChamado : TelaBase<Chamado>, ITela
         {
             Console.WriteLine(
                 "{0,  -10} | {1,  -20} | {2,  -15} | {3,  -15} | {4,  -20} | {5,  -15}",
-                e.id, e.Nome, e.PrecoAquisicao.ToString("C2"), e.NumeroSerie, e.Fabricante.nome, e.DataFabricacao.ToShortDateString()
+                e.Id, e.Nome, e.PrecoAquisicao.ToString("C2"), e.NumeroSerie, e.Fabricante.Nome, e.DataFabricacao.ToShortDateString()
 );
         }
 
